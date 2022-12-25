@@ -1,16 +1,14 @@
-import { Observable } from './rxjs';
-//可观察对象
-const observable = new Observable((subscriber) => {
-  subscriber.next(1);
-  subscriber.next(2);
-  subscriber.next(3);
-  subscriber.complete();
-  subscriber.next(4);
+import { of, from } from './rxjs';
+const arrayLikeObservable = of(1, 2, 3);
+
+arrayLikeObservable.subscribe({
+  next: value => console.log('arrayLikeObservable', value),
+  complete: () => console.log('arrayLikeObservable complete')
 });
-//observer
-/* const observer = {
-  next: (value) => console.log(`next value:`, value),
-  complete: () => console.log('complete')
-}; */
-//subscribe参数可以传一个观察者对象，也可以只传一个next函数
-observable.subscribe((value) => console.log(`next value:`, value));
+
+const promiseLikeObservable = from(Promise.resolve(4));
+
+promiseLikeObservable.subscribe({
+  next: value => console.log('promiseLikeObservable', value),
+  complete: () => console.log('promiseLikeObservable complete')
+}); 
