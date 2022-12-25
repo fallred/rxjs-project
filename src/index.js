@@ -1,17 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+import { Observable } from './rxjs';
+//可观察对象
+const observable = new Observable((subscriber) => {
+  subscriber.next(1);
+  subscriber.next(2);
+  subscriber.next(3);
+  subscriber.complete();
+  subscriber.next(4);
+});
+//observer
+/* const observer = {
+  next: (value) => console.log(`next value:`, value),
+  complete: () => console.log('complete')
+}; */
+//subscribe参数可以传一个观察者对象，也可以只传一个next函数
+observable.subscribe((value) => console.log(`next value:`, value));
