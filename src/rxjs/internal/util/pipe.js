@@ -30,4 +30,3 @@ function c(str) {
 }
 
 let res = c(b(a('hello')));
-console.log(res);//cbahello

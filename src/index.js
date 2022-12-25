@@ -1,12 +1,13 @@
-import { of, map, filter } from './rxjs';
+import { asyncScheduler } from './rxjs';
 
-/* of(1, 2, 3)
-  .pipe(map(val => val * 2))//[2,4,6]
-  .pipe(filter(val => val > 3))//[4,6]
-  .pipe(map(val => val + 1))//[5,7]
-  .subscribe(console.log)//5 7
- */
+function task(state) {
+  console.log('state:', state);
+  if (state < 5) {
+    //如果state小于5的话，再次调度此任务，新的状态是state+1,延迟1s
+    this.schedule(state + 1, 1000);
+  }
+}
+//开始调度task任务 1参数是要执行的任务 2参数是延迟的时间 3参数是初始的状态
+asyncScheduler.schedule(task, 1000, 0)
 
-of(1, 2, 3)
-  .pipe(map(val => val * 2), filter(val => val > 3), map(val => val + 1))//[2,4,6]
-  .subscribe(console.log)//5 7
+//setTimeout(task, 1000, 0);
