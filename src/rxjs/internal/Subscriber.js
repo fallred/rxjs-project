@@ -1,8 +1,10 @@
 
 import { isFunction } from './util/isFunction';
-export class Subscriber {
+import { Subscription } from './Subscription';
+export class Subscriber extends Subscription {
   isStopped = false
   constructor(observerOrNext) {
+    super();
     let observer;
     if (isFunction(observerOrNext)) {
       observer = {

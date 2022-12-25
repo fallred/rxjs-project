@@ -11,7 +11,10 @@ export class Observable {
   subscribe(observerOrNext) {
     //创建一个订阅者的对象
     const subscriber = new Subscriber(observerOrNext);
-    this._subscribe(subscriber);
+    //订阅函数执行后会返回一个销毁函数
+    const teardown = this._subscribe(subscriber);
+    //把销毁函数存放到subscriber
+    subscriber.add(teardown);
     return subscriber;
   }
 }
