@@ -25,6 +25,7 @@ export class AsyncAction {
     return setInterval(this.execute, delay)
   }
   execute = () => {
+    //execute里都赋值isPending为false了，为啥还需要判断??
     this.pending = false;
     this.work(this.state);
     //如果在 work中没有调度新的任务的话，那就把定时器也清掉
