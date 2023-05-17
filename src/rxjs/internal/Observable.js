@@ -1,6 +1,7 @@
 
 import { Subscriber } from './Subscriber';
 import { pipeFromArray } from './util/pipe';
+
 export class Observable {
   constructor(subscribe) {
     if (subscribe) {

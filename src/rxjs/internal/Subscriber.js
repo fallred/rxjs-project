@@ -1,6 +1,7 @@
 
 import { isFunction } from './util/isFunction';
 import { Subscription } from './Subscription';
+
 export class Subscriber extends Subscription {
   isStopped = false
   constructor(observerOrNext) {
