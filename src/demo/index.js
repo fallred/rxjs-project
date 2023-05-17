@@ -1,8 +1,8 @@
 import { http } from './fetch/http.js';
 
 
-// import './Observable';
-// import './Subject'
+// import './Observable.js';
+import './Subject.js'
 // import './interval'
 // import './bufferTime'
 // import './buffer'
@@ -12,7 +12,7 @@ import { http } from './fetch/http.js';
 // import './concatMap'//可以异步，并且可以映射出一个Observable   串行执行，顺序是固定的
 //import './takeUntil'
 //import './withLatestFrom'
-import './drag.js';
+// import './drag.js';
 //import './multiRequest'
 //import './race'
 //import './board'

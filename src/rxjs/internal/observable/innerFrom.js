@@ -1,7 +1,7 @@
 
-import { Observable } from '../Observable';
-import { isPromise } from '../util/isPromise';
-import { isArrayLike } from '../util/isArrayLike';
+import { Observable } from '../Observable.js';
+import { isPromise } from '../util/isPromise.js';
+import { isArrayLike } from '../util/isArrayLike.js';
 /**
  * 是要把input转成Observable
  * @param {*} input 

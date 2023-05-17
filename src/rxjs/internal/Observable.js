@@ -1,6 +1,6 @@
 
-import { Subscriber } from './Subscriber';
-import { pipeFromArray } from './util/pipe';
+import { Subscriber } from './Subscriber.js';
+import { pipeFromArray } from './util/pipe.js';
 
 export class Observable {
   constructor(subscribe) {

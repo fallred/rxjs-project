@@ -1,4 +1,4 @@
-import { Observable } from "../Observable"
+import { Observable } from "../Observable.js"
 export function take(count) {
   //source上游的可观察对象
   return source => {

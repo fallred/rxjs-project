@@ -1,6 +1,6 @@
 
-import { isFunction } from './util/isFunction';
-import { Subscription } from './Subscription';
+import { isFunction } from './util/isFunction.js';
+import { Subscription } from './Subscription.js';
 
 export class Subscriber extends Subscription {
   isStopped = false

@@ -1,11 +1,11 @@
-import { Subject } from './rxjs';
+import { Subject, Observable } from './rxjs/index.js';
 
-const subject = new Subject();
-subject.next(1);
-subject.subscribe({ next: value => console.log(`observerA`, value) });
-subject.next(2)
-subject.subscribe({ next: value => console.log(`observerB`, value) });
-subject.next(3);
+// const subject = new Subject();
+// subject.next(1);
+// subject.subscribe({ next: value => console.log(`observerA`, value) });
+// subject.next(2)
+// subject.subscribe({ next: value => console.log(`observerB`, value) });
+// subject.next(3);
 
 
 /**
@@ -24,7 +24,7 @@ observerB 3
  * Hot Observable
  * 每当有observer订阅时，会将observer注意到观察者列表中
  */
-/* const source = new Observable(subscriber => {
+const source = new Observable(subscriber => {
   subscriber.next(Math.random());
   subscriber.next(Math.random());
   subscriber.next(Math.random());
@@ -32,4 +32,4 @@ observerB 3
 });
 source.subscribe(x => console.log(`subscriberA:${x}`));
 source.subscribe(x => console.log(`subscriberB:${x}`));
- */
+

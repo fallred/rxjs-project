@@ -1,6 +1,6 @@
-import { asyncScheduler } from "../scheduler/async";
-import { Observable } from "../Observable";
-import { Scheduler } from "../Scheduler";
+import { asyncScheduler } from "../scheduler/async.js";
+import { Observable } from "../Observable.js";
+import { Scheduler } from "../Scheduler.js";
 
 export function timer(dueTime = 0, intervalOrScheduler, scheduler = asyncScheduler) {
   let intervalDuration = -1;

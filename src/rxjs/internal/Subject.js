@@ -1,4 +1,4 @@
-import { Observable } from "./Observable";
+import { Observable } from "./Observable.js";
 export class Subject extends Observable {
   observers = []
   _subscribe(subscriber) {

@@ -1,4 +1,4 @@
-import { Observable } from '../Observable';
+import { Observable } from '../Observable.js';
 
 export function fromEvent(target, eventName) {
   return new Observable(subscriber => {
