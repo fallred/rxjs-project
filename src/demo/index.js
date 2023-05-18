@@ -31,9 +31,9 @@ http.get('http://localhost:8080/api/user/1', {}, requestId).then(response => {
 }, error => {
   console.error(error);
 })
-setTimeout(() => {
-  http.cancel(requestId)
-}, 1000)
+// setTimeout(() => {
+//   http.cancel(requestId)
+// }, 1000)
 
 
 /* http.post('http://localhost:8080/api/user', { name: 'zhangsan' }).then(response => {
