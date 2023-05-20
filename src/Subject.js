@@ -1,5 +1,5 @@
 // 当作Observable
-import { Subject, from, Observable } from 'rxjs';
+import { Subject, from } from 'rxjs';
 
 // const source$ = new Subject();
 // source$.subscribe((val) => console.log('Subject订阅A', val));

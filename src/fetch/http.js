@@ -1,6 +1,7 @@
 import { lastValueFrom, share, mergeMap, filter, merge, Subject, takeUntil, throwIfEmpty } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 import { getUrlFromOptions, getInitFromOptions } from './utils.js';
+
 class Http {
   cancelRequests = new Subject()
   cancel(requestId) {

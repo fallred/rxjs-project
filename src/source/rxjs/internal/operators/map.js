@@ -1,4 +1,5 @@
 import { Observable } from "../Observable.js"
+
 export function map(project) {
   //operation 传入老的Observable,返回新的Observable
   return source => {

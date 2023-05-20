@@ -2,7 +2,7 @@ import { http } from './fetch/http.js';
 
 
 // import './Observable.js';
-import './Subject.js'
+// import './Subject.js'
 // import './interval'
 // import './bufferTime'
 // import './buffer'
@@ -23,6 +23,10 @@ import './Subject.js'
 // import './throwError'
 //import './filter'
 //import './throwIfEmpty'
+
+// import './react/search.js';
+// import './react/datasource.js';
+import './react/form-validate.js';
 
 const requestId = Date.now()
 http.get('http://localhost:8080/api/user/1', {}, requestId).then(response => {
