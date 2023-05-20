@@ -1,28 +1,53 @@
-import { fromEvent, withLatestFrom, takeUntil, switchMap, throttleTime, debounceTime, from } from 'rxjs';
+import { fromEvent, withLatestFrom, takeUntil, switchMap, throttleTime } from 'rxjs';
+import { useEffect, useRef } from 'react';
+import { createRoot } from 'react-dom/client';
 
-const draggableElement = document.getElementById('draggable')
-const mouseDown$ = fromEvent(draggableElement, 'mousedown');
-const mouseMove$ = fromEvent(draggableElement, 'mousemove').pipe(throttleTime(30));
-const mouseUp$ = fromEvent(draggableElement, 'mouseup');
+const DraggableDiv = () => {
+  const draggableRef = useRef(null);
 
-mouseDown$.pipe(
-  switchMap(() => mouseMove$.pipe(takeUntil(mouseUp$.pipe(debounceTime(500))))),
-  withLatestFrom(mouseDown$, (moveEvent, downEvent) => {
-    return {
-      left: moveEvent.clientX - downEvent.offsetX,
-      top: moveEvent.clientY - downEvent.offsetY
-    }
-  })
-).subscribe(({ left, top }) => {
-  draggableElement.style.left = left + 'px';
-  draggableElement.style.top = top + 'px';
-})
-// mouseDown$.unsubscribe();
-// mouseMove$.unsubscribe();
-// mouseUp$.unsubscribe();
-/**
- * switchMap上已经消费了一次 mouseDown，转化成 mouseMove，
- * 为啥下面的 withLatestFrom 还能拿到 mouseDonw
- */
+  useEffect(() => {
+    const draggableElement = draggableRef.current;
+    const mouseDown$ = fromEvent(draggableElement, 'mousedown');
+    const mouseMove$ = fromEvent(document, 'mousemove').pipe(throttleTime(30));
+    const mouseUp$ = fromEvent(document, 'mouseup');
 
+    const subscription = mouseDown$.pipe(
+      switchMap(() => mouseMove$.pipe(takeUntil(mouseUp$))),
+      withLatestFrom(mouseDown$, (moveEvent, downEvent) => {
+        return {
+          left: moveEvent.clientX - downEvent.offsetX,
+          top: moveEvent.clientY - downEvent.offsetY
+        }
+      })
+    ).subscribe(({ left, top }) => {
+      draggableElement.style.left = left + 'px';
+      draggableElement.style.top = top + 'px';
+    });
 
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  return (
+    <div
+      ref={draggableRef}
+      style={{
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: '100px',
+        height: '100px',
+        backgroundColor: 'orange',
+        cursor: 'move',
+      }}
+    >
+      Drag Me!
+    </div>
+  );
+};
+
+// export default DraggableDiv;
+
+const root = createRoot(document.getElementById('root'));
+root.render(<DraggableDiv />);
