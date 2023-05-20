@@ -26,7 +26,8 @@ import { http } from './fetch/http.js';
 
 // import './react/search.js';
 // import './react/datasource.js';
-import './react/form-validate.js';
+// import './react/form-validate.js';
+import './react/chart1.js';
 
 const requestId = Date.now()
 http.get('http://localhost:8080/api/user/1', {}, requestId).then(response => {
