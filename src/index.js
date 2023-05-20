@@ -12,7 +12,7 @@ import { http } from './fetch/http.js';
 // import './concatMap'//可以异步，并且可以映射出一个Observable   串行执行，顺序是固定的
 //import './takeUntil'
 //import './withLatestFrom'
-// import './drag.js';
+import './drag.js';
 //import './multiRequest'
 //import './race'
 //import './board'
@@ -27,7 +27,8 @@ import { http } from './fetch/http.js';
 // import './react/search.js';
 // import './react/datasource.js';
 // import './react/form-validate.js';
-import './react/chart1.js';
+// import './react/real-time-chart.js';
+// import './react/drag.js';
 
 const requestId = Date.now()
 http.get('http://localhost:8080/api/user/1', {}, requestId).then(response => {
