@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { fromEvent } from 'rxjs';
+import { fromEvent, of } from 'rxjs';
 import { throttleTime, map, switchMap, takeUntil, filter } from 'rxjs/operators';
 
 function App() {
@@ -19,18 +19,28 @@ function App() {
         const loadMoreBtn = document.querySelector('#load-more-btn');
 
         // 监听滚动事件，当滚动到底部时发出事件
-        const scroll$ = fromEvent(list, 'scroll').pipe(
-            throttleTime(500),
-            map(() => list.scrollHeight - list.scrollTop <= list.clientHeight),
-            filter(atBottom => atBottom)
-        );
+        const scroll$ = fromEvent(list, 'scroll');
+        // .pipe(
+        //     throttleTime(500),
+        //     map(() => list.scrollHeight - list.scrollTop <= list.clientHeight),
+        //     filter(atBottom => atBottom)
+        // );
 
         // 监听加载更多按钮点击事件
         const loadMoreBtn$ = fromEvent(loadMoreBtn, 'click');
 
         // 合并滚动事件和加载更多按钮点击事件，以便在任何一个事件发生时加载更多数据
         const loadMore$ = scroll$.pipe(
-            switchMap(() => loadMoreData()),
+            throttleTime(500),
+            map((event) => event.target.scrollTop),
+            // switchMap(() => loadMoreData()),
+            switchMap((scrollTop) => {
+                if (scrollTop > 10) {
+                  return loadMoreData();
+                } else {
+                  return of([]);
+                }
+              }),
             takeUntil(loadMoreBtn$)
         );
 
