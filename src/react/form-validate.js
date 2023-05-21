@@ -12,9 +12,9 @@ function Form() {
     // 用于验证输入的函数
     function validateInput(value) {
         if (value.length < minLength) {
-        return '输入长度必须大于等于 ' + minLength;
+            return '输入长度必须大于等于 ' + minLength;
         } else {
-        return null;
+            return null;
         }
     }
 

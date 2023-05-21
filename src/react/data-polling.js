@@ -25,7 +25,7 @@ const source$ = interval(5000).pipe(
     })))
 );
   
-source$.subscribe(
-    value => console.log(value),
-    error => console.error(error)
-);
+source$.subscribe({
+  next: value => console.log(value),
+  error: error => console.error(error),
+});

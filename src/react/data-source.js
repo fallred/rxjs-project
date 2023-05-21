@@ -27,7 +27,7 @@ class App extends Component {
     // 创建两个 Observable，一个获取用户信息，一个获取用户的仓库列表
     const user$ = from(axios.get(`https://api.github.com/users/${username}`)).pipe(
       map(response => response.data),
-      catchError(error => throwError(error))
+      catchError(error => throwError(() => error))
     );
     const repos$ = from(axios.get(`https://api.github.com/users/${username}/repos`)).pipe(
       map(response => response.data),
@@ -37,16 +37,16 @@ class App extends Component {
     // 合并两个 Observable，当它们都完成时更新组件状态
     forkJoin([user$, repos$]).pipe(
       switchMap(([user, repos]) => of({ user, repos })),
-      catchError(error => throwError(error))
+      catchError(error => throwError(() => error))
     )
-    .subscribe(
-      response => {
+    .subscribe({
+      next: response => {
         this.setState({ user: response.user, repos: response.repos, loading: false, error: null });
       },
-      error => {
+      error: error => {
         this.setState({ user: null, repos: null, loading: false, error });
       }
-    );
+    });
   }
 
   render() {
